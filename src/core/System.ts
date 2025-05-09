@@ -1,10 +1,15 @@
+import { Component, ComponentConstructor } from "./Component";
+import { Entity } from "./Entity";
 import { Game } from "./Game";
 
-export class System {
-  game: Game;
-  constructor(game: Game) {
-    this.game = game;
-  }
+export abstract class System {
+  constructor(protected readonly game: Game) {}
 
-  update(deltaTime: number) {}
+  abstract update(deltaTime: number): void;
+
+  protected query<C extends Component[]>(
+    ...componentTypes: { [K in keyof C]: ComponentConstructor<C[K]> }
+  ): Entity[] {
+    return this.game.queryEntities(...componentTypes);
+  }
 }

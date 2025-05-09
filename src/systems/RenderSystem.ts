@@ -27,7 +27,7 @@ export class RenderSystem extends System {
   update() {
     this.clear();
 
-    this.game.entities.forEach((entity) => {
+    this.query(Transform, Renderable).forEach((entity) => {
       const transform = entity.getComponent(Transform);
       const renderable = entity.getComponent(Renderable);
 
