@@ -1,7 +1,7 @@
+import { Collider } from "../collision/Collider.js";
 import { Entity } from "../core/Entity.js";
-import { Transform } from "../components/Transform.js";
-import { Renderable } from "../components/Renderable.js";
-import { Collider } from "../components/Collider.js";
+import { Renderable } from "../render/Renderable.js";
+import { Transform } from "../transform/Transform.js";
 
 export class Platform extends Entity {
   constructor(x: number, y: number, width: number, height: number) {

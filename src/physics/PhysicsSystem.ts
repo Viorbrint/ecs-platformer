@@ -1,6 +1,6 @@
-import { Physics } from "../components/Physics";
-import { Transform } from "../components/Transform";
 import { System } from "../core/System";
+import { Transform } from "../transform/Transform";
+import { Physics } from "./Physics";
 
 export class PhysicsSystem extends System {
   update(deltaTime: number) {

@@ -1,13 +1,13 @@
+import { CollisionSystem } from "./collision/CollisionSystem";
 import { Game } from "./core/Game";
-import { Player } from "./entities/Player";
-import { Platform } from "./entities/Platform";
-import { CollisionSystem } from "./systems/CollisionSystem";
-import { InputSystem } from "./systems/InputSystem";
-import { PhysicsSystem } from "./systems/PhysicsSystem";
-import { RenderSystem } from "./systems/RenderSystem";
-import { PlayerMoveSystem } from "./systems/PlayerMoveSystem";
-import { PlayerInputSystem } from "./systems/PlayerInputSystem";
-import { JumpSystem } from "./systems/JumpSystem";
+import { InputSystem } from "./input/InputSystem";
+import { JumpSystem } from "./jump/JumpSystem";
+import { PhysicsSystem } from "./physics/PhysicsSystem";
+import { Platform } from "./platform/Platform";
+import { Player } from "./player/Player";
+import { PlayerInputSystem } from "./player/PlayerInputSystem";
+import { PlayerMoveSystem } from "./player/PlayerMoveSystem";
+import { RenderSystem } from "./render/RenderSystem";
 
 const game = new Game();
 

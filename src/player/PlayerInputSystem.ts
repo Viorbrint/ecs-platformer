@@ -1,7 +1,7 @@
-import { Jump } from "../components/Jump";
-import { PlayerInput } from "../components/PlayerInput";
-import { PlayerMove } from "../components/PlayerMove";
 import { System } from "../core/System";
+import { Jump } from "../jump/Jump";
+import { PlayerInput } from "./PlayerInput";
+import { PlayerMove } from "./PlayerMove";
 
 export class PlayerInputSystem extends System {
   update() {

@@ -1,8 +1,8 @@
-import { Collider } from "../components/Collider";
-import { Physics } from "../components/Physics";
-import { Transform } from "../components/Transform";
 import { Entity } from "../core/Entity";
 import { System } from "../core/System";
+import { Physics } from "../physics/Physics";
+import { Transform } from "../transform/Transform";
+import { Collider } from "./Collider";
 
 export class CollisionSystem extends System {
   update() {

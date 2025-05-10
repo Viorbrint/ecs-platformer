@@ -1,4 +1,4 @@
-import { InputService } from "../services/InputService";
+import { InputService } from "../input/InputService";
 import { Component, ComponentConstructor } from "./Component";
 import { Entity } from "./Entity";
 import { System } from "./System";

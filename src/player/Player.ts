@@ -1,11 +1,11 @@
+import { Collider } from "../collision/Collider.js";
 import { Entity } from "../core/Entity.js";
-import { Transform } from "../components/Transform.js";
-import { Physics } from "../components/Physics.js";
-import { Collider } from "../components/Collider.js";
-import { Renderable } from "../components/Renderable.js";
-import { PlayerInput } from "../components/PlayerInput.js";
-import { Jump } from "../components/Jump.js";
-import { PlayerMove } from "../components/PlayerMove.js";
+import { Jump } from "../jump/Jump.js";
+import { Physics } from "../physics/Physics.js";
+import { Renderable } from "../render/Renderable.js";
+import { Transform } from "../transform/Transform.js";
+import { PlayerInput } from "./PlayerInput.js";
+import { PlayerMove } from "./PlayerMove.js";
 
 export class Player extends Entity {
   constructor(x: number, y: number) {

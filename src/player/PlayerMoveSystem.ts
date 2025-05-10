@@ -1,6 +1,6 @@
-import { Physics } from "../components/Physics";
-import { PlayerMove } from "../components/PlayerMove";
 import { System } from "../core/System";
+import { Physics } from "../physics/Physics";
+import { PlayerMove } from "./PlayerMove";
 
 export class PlayerMoveSystem extends System {
   update() {

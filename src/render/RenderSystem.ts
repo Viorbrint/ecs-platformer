@@ -1,7 +1,13 @@
-export class Renderer {
+import { Game } from "../core/Game";
+import { System } from "../core/System";
+import { Transform } from "../transform/Transform";
+import { Renderable } from "./Renderable";
+
+export class RenderSystem extends System {
   canvas: HTMLCanvasElement;
   ctx: CanvasRenderingContext2D;
-  constructor(canvasId: string) {
+  constructor(game: Game, canvasId: string) {
+    super(game);
     const canvas = document.getElementById(canvasId);
     if (canvas == null || canvas instanceof HTMLCanvasElement === false) {
       throw new Error(
@@ -16,6 +22,26 @@ export class Renderer {
     this.ctx = ctx;
     this.resizeCanvas();
     window.addEventListener("resize", () => this.resizeCanvas());
+  }
+
+  update() {
+    this.clear();
+
+    this.query(Transform, Renderable).forEach((entity) => {
+      const transform = entity.getComponent(Transform);
+      const renderable = entity.getComponent(Renderable);
+
+      if (transform && renderable) {
+        this.ctx.fillStyle = renderable.color;
+        this.drawRect(
+          transform.x,
+          transform.y,
+          transform.width,
+          transform.height,
+          "red",
+        );
+      }
+    });
   }
 
   resizeCanvas() {

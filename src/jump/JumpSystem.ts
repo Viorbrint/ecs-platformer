@@ -1,9 +1,9 @@
-import { Collider } from "../components/Collider";
-import { Jump } from "../components/Jump";
-import { Physics } from "../components/Physics";
-import { Transform } from "../components/Transform";
+import { Collider } from "../collision/Collider";
 import { Entity } from "../core/Entity";
 import { System } from "../core/System";
+import { Physics } from "../physics/Physics";
+import { Transform } from "../transform/Transform";
+import { Jump } from "./Jump";
 
 export class JumpSystem extends System {
   update() {

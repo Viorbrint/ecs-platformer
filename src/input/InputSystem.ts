@@ -1,5 +1,5 @@
-import { PlayerInput } from "../components/PlayerInput";
 import { System } from "../core/System";
+import { PlayerInput } from "../player/PlayerInput";
 
 export class InputSystem extends System {
   update() {
