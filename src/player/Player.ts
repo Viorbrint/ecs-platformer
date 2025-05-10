@@ -6,10 +6,12 @@ import { Renderable } from "../render/Renderable.js";
 import { Transform } from "../transform/Transform.js";
 import { PlayerInput } from "./PlayerInput.js";
 import { PlayerMove } from "./PlayerMove.js";
+import { PlayerTag } from "./PlayerTag.js";
 
 export class Player extends Entity {
   constructor(x: number, y: number) {
     super();
+    this.addComponent(new PlayerTag());
     this.addComponent(new PlayerInput());
     this.addComponent(new Jump());
     this.addComponent(new PlayerMove());
