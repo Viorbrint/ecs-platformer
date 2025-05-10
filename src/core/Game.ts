@@ -11,8 +11,6 @@ export class Game {
     input: new InputService(),
   };
 
-  public readonly state: Record<string, any> = {};
-
   public start() {
     requestAnimationFrame(this.gameLoop.bind(this));
   }
