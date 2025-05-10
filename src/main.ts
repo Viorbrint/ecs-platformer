@@ -8,7 +8,8 @@ import { Platform } from "./platform/Platform";
 import { Player } from "./player/Player";
 import { PlayerInputSystem } from "./player/PlayerInputSystem";
 import { PlayerMoveSystem } from "./player/PlayerMoveSystem";
-import { RenderSystem } from "./render/RenderSystem";
+import { RectRenderSystem } from "./render/RectRenderSystem";
+import { RenderService } from "./render/RenderService";
 
 const game = new Game();
 
@@ -18,7 +19,7 @@ game.addSystem(new JumpSystem(game));
 game.addSystem(new PlayerMoveSystem(game));
 game.addSystem(new PhysicsSystem(game));
 game.addSystem(new CollisionSystem(game));
-game.addSystem(new RenderSystem(game, "gameCanvas"));
+game.addSystem(new RectRenderSystem(game, new RenderService("gameCanvas")));
 
 game.addEntity(new Player(300, 300));
 game.addEntity(new Platform(0, 0, 500, 100));

@@ -1,6 +1,6 @@
 import { Component } from "../core/Component";
 
-export class Renderable extends Component {
+export class RectPrimitive extends Component {
   color: string;
   constructor(color: string) {
     super();

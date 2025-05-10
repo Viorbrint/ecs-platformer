@@ -3,7 +3,7 @@ import { Entity } from "../core/Entity.js";
 import { Jump } from "../jump/Jump.js";
 import { Physics } from "../physics/Physics.js";
 import { Position } from "../position/Position.js";
-import { Renderable } from "../render/Renderable.js";
+import { RectPrimitive } from "../render/RectPrimitive.js";
 import { Transform } from "../transform/Transform.js";
 import { PlayerInput } from "./PlayerInput.js";
 import { PlayerMove } from "./PlayerMove.js";
@@ -20,6 +20,6 @@ export class Player extends Entity {
     this.addComponent(new Transform(40, 60));
     this.addComponent(new Position(x, y));
     this.addComponent(new Collider());
-    this.addComponent(new Renderable("blue"));
+    this.addComponent(new RectPrimitive("blue"));
   }
 }
