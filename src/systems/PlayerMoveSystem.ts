@@ -9,7 +9,6 @@ export class PlayerMoveSystem extends System {
       const p = e.getComponent(Physics)!;
 
       if (move.moveRightRequested) {
-        console.log("moveRightRequested");
         p.xSpeed = 300;
       }
 
