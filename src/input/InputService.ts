@@ -1,4 +1,5 @@
 import { GameAction } from "./GameAction";
+import { IInputService } from "./IInputService";
 import { isKeyCode } from "./KeyCodeUtils";
 import { KeyBindings, KeyCode, KeyCodes } from "./KeysTypes";
 
@@ -8,7 +9,7 @@ type KeyState = {
   justReleased: boolean;
 };
 
-export class InputService {
+export class InputService implements IInputService {
   private defaultBindings: KeyBindings = {
     jump: KeyCodes.ARROW_UP,
     moveLeft: KeyCodes.ARROW_LEFT,

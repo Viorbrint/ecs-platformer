@@ -2,10 +2,10 @@ import { Game } from "../core/Game";
 import { INPUT_SERVICE, ServiceContainer } from "../core/ServiceContainer";
 import { System } from "../core/System";
 import { PlayerInput } from "../player/PlayerInput";
-import { InputService } from "./InputService";
+import { IInputService } from "./IInputService";
 
 export class InputSystem extends System {
-  private readonly inputService: InputService;
+  private readonly inputService: IInputService;
 
   constructor(game: Game) {
     super(game);

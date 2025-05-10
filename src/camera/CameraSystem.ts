@@ -1,12 +1,12 @@
 import { System } from "../core/System";
 import { Position } from "../position/Position";
 import { Camera } from "./Camera";
-import { RenderService } from "../render/RenderService";
 import { Game } from "../core/Game";
 import { RENDER_SERVICE, ServiceContainer } from "../core/ServiceContainer";
+import { IRenderService } from "../render/IRenderService";
 
 export class CameraSystem extends System {
-  private readonly renderService: RenderService;
+  private readonly renderService: IRenderService;
   constructor(game: Game) {
     super(game);
     this.renderService = ServiceContainer.getInstance().resolve(RENDER_SERVICE);
