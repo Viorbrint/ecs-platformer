@@ -1,12 +1,10 @@
 import { Component } from "../core/Component";
 
 export class Position extends Component {
-  x: number;
-  y: number;
-
-  constructor(x: number, y: number) {
+  constructor(
+    public x: number,
+    public y: number,
+  ) {
     super();
-    this.x = x;
-    this.y = y;
   }
 }

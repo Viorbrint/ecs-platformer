@@ -1,9 +1,7 @@
 import { Component } from "../core/Component";
 
 export class RectPrimitive extends Component {
-  color: string;
-  constructor(color: string) {
+  constructor(public color: string) {
     super();
-    this.color = color;
   }
 }

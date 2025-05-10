@@ -1,11 +1,10 @@
 import { Component } from "../core/Component";
 
 export class Transform extends Component {
-  width: number;
-  height: number;
-  constructor(width: number, height: number) {
+  constructor(
+    public width: number,
+    public height: number,
+  ) {
     super();
-    this.width = width;
-    this.height = height;
   }
 }
