@@ -35,7 +35,7 @@ export class JumpSystem extends System {
         return Math.abs(t1.y - (t2.y + t2.height));
       })
       .sort((a, b) => a - b)[0];
-    if (a < 0.5) {
+    if (a < 2) {
       return true;
     }
     return false;
