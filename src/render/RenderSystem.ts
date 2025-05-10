@@ -33,8 +33,7 @@ export class RenderSystem extends System {
       const p = entity.getComponent(Position)!;
       const renderable = entity.getComponent(Renderable)!;
 
-      this.ctx.fillStyle = renderable.color;
-      this.drawRect(p.x, p.y, t.width, t.height, "red");
+      this.drawRect(p.x, p.y, t.width, t.height, renderable.color);
     });
   }
 
