@@ -1,14 +1,15 @@
 import { Game } from "../core/Game";
+import { INPUT_SERVICE, ServiceContainer } from "../core/ServiceContainer";
 import { System } from "../core/System";
 import { PlayerInput } from "../player/PlayerInput";
 import { InputService } from "./InputService";
 
 export class InputSystem extends System {
-  constructor(
-    game: Game,
-    private readonly inputService: InputService,
-  ) {
+  private readonly inputService: InputService;
+
+  constructor(game: Game) {
     super(game);
+    this.inputService = ServiceContainer.getInstance().resolve(INPUT_SERVICE);
   }
 
   update() {

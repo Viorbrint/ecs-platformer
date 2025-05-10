@@ -3,13 +3,13 @@ import { Position } from "../position/Position";
 import { Camera } from "./Camera";
 import { RenderService } from "../render/RenderService";
 import { Game } from "../core/Game";
+import { RENDER_SERVICE, ServiceContainer } from "../core/ServiceContainer";
 
 export class CameraSystem extends System {
-  constructor(
-    game: Game,
-    private readonly renderService: RenderService,
-  ) {
+  private readonly renderService: RenderService;
+  constructor(game: Game) {
     super(game);
+    this.renderService = ServiceContainer.getInstance().resolve(RENDER_SERVICE);
   }
 
   update() {
@@ -18,7 +18,6 @@ export class CameraSystem extends System {
     if (cameras.length === 0) return;
 
     const camera = cameras[0].getComponent(Camera)!;
-    console.log(cameras);
 
     if (camera.target) {
       const targetPos = camera.target.getComponent(Position);
