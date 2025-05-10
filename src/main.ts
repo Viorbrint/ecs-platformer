@@ -1,5 +1,6 @@
 import { CollisionSystem } from "./collision/CollisionSystem";
 import { Game } from "./core/Game";
+import { InputService } from "./input/InputService";
 import { InputSystem } from "./input/InputSystem";
 import { JumpSystem } from "./jump/JumpSystem";
 import { PhysicsSystem } from "./physics/PhysicsSystem";
@@ -11,7 +12,7 @@ import { RenderSystem } from "./render/RenderSystem";
 
 const game = new Game();
 
-game.addSystem(new InputSystem(game));
+game.addSystem(new InputSystem(game, new InputService()));
 game.addSystem(new PlayerInputSystem(game));
 game.addSystem(new JumpSystem(game));
 game.addSystem(new PlayerMoveSystem(game));

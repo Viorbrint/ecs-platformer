@@ -1,4 +1,3 @@
-import { InputService } from "../input/InputService";
 import { Component, ComponentConstructor } from "./Component";
 import { Entity } from "./Entity";
 import { System } from "./System";
@@ -7,9 +6,6 @@ export class Game {
   private lastTime = performance.now();
   private entities: Entity[] = [];
   private systems: System[] = [];
-  public readonly services = {
-    input: new InputService(),
-  };
 
   public start() {
     requestAnimationFrame(this.gameLoop.bind(this));
