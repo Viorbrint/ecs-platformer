@@ -20,10 +20,6 @@ import { RenderService } from "./render/RenderService";
 
 const game = new Game();
 
-const renderService = new RenderService("gameCanvas");
-
-new InputService();
-
 const container = ServiceContainer.getInstance();
 
 container.register(RENDER_SERVICE, () => new RenderService("gameCanvas"));
@@ -45,15 +41,6 @@ game.addEntity(new Platform(800, 0, 200, 100));
 game.addEntity(new Platform(900, 200, 200, 100));
 game.addEntity(new Platform(1100, 0, 2000, 100));
 
-game.addEntity(
-  new CameraEntity(
-    0,
-    0,
-    renderService.width,
-    renderService.height,
-    0.05,
-    player,
-  ),
-);
+game.addEntity(new CameraEntity(0.05, player));
 
 game.start();

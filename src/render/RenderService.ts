@@ -1,7 +1,7 @@
-import { Camera } from "../camera/Camera";
+import { Position } from "../position/Position";
 
 export class RenderService {
-  private currentCamera?: Camera;
+  private currentCamera?: Position;
   private canvas: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
 
@@ -20,7 +20,7 @@ export class RenderService {
     window.addEventListener("resize", () => this.resize());
   }
 
-  setCamera(camera: Camera) {
+  setCamera(camera: Position) {
     this.currentCamera = camera;
   }
 

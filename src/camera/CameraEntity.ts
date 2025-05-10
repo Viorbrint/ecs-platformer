@@ -1,16 +1,14 @@
 import { Entity } from "../core/Entity";
+import { Position } from "../position/Position";
 import { Camera } from "./Camera";
 
 export class CameraEntity extends Entity {
   constructor(
-    public x: number = 0,
-    public y: number = 0,
-    public width: number = 100,
-    public height: number = 100,
-    public followSpeed: number = 1000,
+    public followSpeed?: number,
     public target?: Entity,
   ) {
     super();
-    this.addComponent(new Camera(x, y, width, height, followSpeed, target));
+    this.addComponent(new Camera(followSpeed, target));
+    this.addComponent(new Position(0, 0));
   }
 }

@@ -13,23 +13,26 @@ export class CameraSystem extends System {
   }
 
   update() {
-    const cameras = this.query(Camera);
+    const cameras = this.query(Camera, Position);
 
     if (cameras.length === 0) return;
 
     const camera = cameras[0].getComponent(Camera)!;
+    const cameraPos = cameras[0].getComponent(Position)!;
 
     if (camera.target) {
       const targetPos = camera.target.getComponent(Position);
       // camera looks for left bottom corner of target pos
       if (targetPos) {
-        camera.x +=
-          (targetPos.x - camera.x - camera.width / 2) * camera.followSpeed;
-        camera.y +=
-          (targetPos.y - camera.y - camera.height / 3) * camera.followSpeed;
+        cameraPos.x +=
+          (targetPos.x - cameraPos.x - this.renderService.width / 2) *
+          camera.followSpeed;
+        cameraPos.y +=
+          (targetPos.y - cameraPos.y - this.renderService.height / 3) *
+          camera.followSpeed;
       }
     }
 
-    this.renderService.setCamera(camera);
+    this.renderService.setCamera(cameraPos);
   }
 }
