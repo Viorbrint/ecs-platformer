@@ -44,8 +44,4 @@ export class Game {
       componentClasses.every((compClass) => entity.hasComponent(compClass)),
     );
   }
-
-  destroy() {
-    this.services.input.destroy();
-  }
 }
