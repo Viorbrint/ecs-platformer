@@ -2,6 +2,7 @@ import { Collider } from "../collision/Collider.js";
 import { Entity } from "../core/Entity.js";
 import { Jump } from "../jump/Jump.js";
 import { Physics } from "../physics/Physics.js";
+import { Position } from "../position/Position.js";
 import { Renderable } from "../render/Renderable.js";
 import { Transform } from "../transform/Transform.js";
 import { PlayerInput } from "./PlayerInput.js";
@@ -16,7 +17,8 @@ export class Player extends Entity {
     this.addComponent(new Jump());
     this.addComponent(new PlayerMove());
     this.addComponent(new Physics());
-    this.addComponent(new Transform(x, y, 40, 60));
+    this.addComponent(new Transform(40, 60));
+    this.addComponent(new Position(x, y));
     this.addComponent(new Collider());
     this.addComponent(new Renderable("blue"));
   }

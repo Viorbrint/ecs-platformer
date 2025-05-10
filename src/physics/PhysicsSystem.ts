@@ -1,11 +1,11 @@
 import { System } from "../core/System";
-import { Transform } from "../transform/Transform";
+import { Position } from "../position/Position";
 import { Physics } from "./Physics";
 
 export class PhysicsSystem extends System {
   update(deltaTime: number) {
-    this.query(Transform, Physics).forEach((entity) => {
-      const transform = entity.getComponent(Transform)!;
+    this.query(Position, Physics).forEach((entity) => {
+      const p = entity.getComponent(Position)!;
       const physics = entity.getComponent(Physics)!;
       physics.xSpeed += physics.xAcc * deltaTime;
       physics.xSpeed = Math.max(
@@ -15,8 +15,8 @@ export class PhysicsSystem extends System {
 
       physics.ySpeed += physics.yAcc * deltaTime;
 
-      transform.x += physics.xSpeed * deltaTime;
-      transform.y += physics.ySpeed * deltaTime;
+      p.x += physics.xSpeed * deltaTime;
+      p.y += physics.ySpeed * deltaTime;
     });
   }
 }

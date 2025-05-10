@@ -1,5 +1,6 @@
 import { Game } from "../core/Game";
 import { System } from "../core/System";
+import { Position } from "../position/Position";
 import { Transform } from "../transform/Transform";
 import { Renderable } from "./Renderable";
 
@@ -28,18 +29,13 @@ export class RenderSystem extends System {
     this.clear();
 
     this.query(Transform, Renderable).forEach((entity) => {
-      const transform = entity.getComponent(Transform);
+      const t = entity.getComponent(Transform);
+      const p = entity.getComponent(Position);
       const renderable = entity.getComponent(Renderable);
 
-      if (transform && renderable) {
+      if (t && renderable) {
         this.ctx.fillStyle = renderable.color;
-        this.drawRect(
-          transform.x,
-          transform.y,
-          transform.width,
-          transform.height,
-          "red",
-        );
+        this.drawRect(p.x, p.y, t.width, t.height, "red");
       }
     });
   }
