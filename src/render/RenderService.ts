@@ -1,4 +1,7 @@
+import { Camera } from "../camera/Camera";
+
 export class RenderService {
+  private currentCamera?: Camera;
   private canvas: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
 
@@ -15,6 +18,21 @@ export class RenderService {
 
     this.resize();
     window.addEventListener("resize", () => this.resize());
+  }
+
+  setCamera(camera: Camera) {
+    this.currentCamera = camera;
+  }
+
+  worldToScreen(x: number, y: number): { x: number; y: number } {
+    if (!this.currentCamera) {
+      return { x, y: this.invertY(y) };
+    }
+
+    return {
+      x: x - this.currentCamera.x,
+      y: y - this.currentCamera.y,
+    };
   }
 
   invertY(y: number) {

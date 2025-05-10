@@ -1,13 +1,12 @@
-import { Entity } from "../core/Entity";
 import { System } from "../core/System";
-import { Physics } from "../physics/Physics";
 import { Position } from "../position/Position";
+import { Physics } from "../physics/Physics";
 import { Transform } from "../transform/Transform";
-import { Collider } from "./Collider";
+import { Entity } from "../core/Entity";
 
 export class CollisionSystem extends System {
   update() {
-    const colliders = this.query(Position, Collider);
+    const colliders = this.query(Position, Transform);
 
     for (let i = 0; i < colliders.length; i++) {
       for (let j = i + 1; j < colliders.length; j++) {
@@ -16,43 +15,55 @@ export class CollisionSystem extends System {
     }
   }
 
-  checkCollision(a: Entity, b: Entity) {
-    const aT = a.getComponent(Transform)!;
-    const bT = b.getComponent(Transform)!;
-    const aP = a.getComponent(Position)!;
-    const bP = b.getComponent(Position)!;
+  private checkCollision(a: Entity, b: Entity) {
+    const aPos = a.getComponent(Position)!;
+    const bPos = b.getComponent(Position)!;
+    const aTransform = a.getComponent(Transform)!;
+    const bTransform = b.getComponent(Transform)!;
 
     if (
-      aP.x + aT.width > bP.x &&
-      aP.x < bP.x + bT.width &&
-      aP.y + aT.height > bP.y &&
-      aP.y < bP.y + bT.height
+      aPos.x + aTransform.width <= bPos.x ||
+      aPos.x >= bPos.x + bTransform.width ||
+      aPos.y + aTransform.height <= bPos.y ||
+      aPos.y >= bPos.y + bTransform.height
     ) {
-      const topCollision = Math.abs(aP.y + aT.height - bP.y);
-      const bottomCollision = Math.abs(aP.y - (bP.y + bT.height));
-      const leftCollision = Math.abs(aP.x + aT.width - bP.x);
-      const rightCollision = Math.abs(aP.x - (bP.x + bT.width));
+      return;
+    }
 
-      const minCollision = Math.min(
-        topCollision,
-        bottomCollision,
-        leftCollision,
-        rightCollision,
-      );
+    const physA = a.hasComponent(Physics);
+    const physB = b.hasComponent(Physics);
 
-      if (minCollision === topCollision) {
-        aP.y = bP.y - aT.height;
-        a.getComponent(Physics)!.ySpeed = 0;
-      } else if (minCollision === bottomCollision) {
-        aP.y = bP.y + bT.height;
-        a.getComponent(Physics)!.ySpeed *= -0.2;
-      } else if (minCollision === leftCollision) {
-        aP.x = bP.x - aT.width;
-        a.getComponent(Physics)!.xSpeed = 0;
-      } else if (minCollision === rightCollision) {
-        aP.x = bP.x + bT.width;
-        a.getComponent(Physics)!.xSpeed = 0;
+    if (!physA && !physB) return;
+
+    // here maybe problems with 2 active entities
+    const active = physA ? a : b;
+
+    const penetrationX =
+      Math.min(aPos.x + aTransform.width, bPos.x + bTransform.width) -
+      Math.max(aPos.x, bPos.x);
+
+    const penetrationY =
+      Math.min(aPos.y + aTransform.height, bPos.y + bTransform.height) -
+      Math.max(aPos.y, bPos.y);
+
+    if (penetrationX < penetrationY) {
+      if (aPos.x < bPos.x) {
+        active.getComponent(Position)!.x = bPos.x - aTransform.width;
+      } else {
+        active.getComponent(Position)!.x = bPos.x + bTransform.width;
       }
+
+      if (physA) a.getComponent(Physics)!.xSpeed = 0;
+      if (physB) b.getComponent(Physics)!.xSpeed = 0;
+    } else {
+      if (aPos.y < bPos.y) {
+        active.getComponent(Position)!.y = bPos.y - aTransform.height;
+      } else {
+        active.getComponent(Position)!.y = bPos.y + bTransform.height;
+      }
+
+      if (physA) a.getComponent(Physics)!.ySpeed = 0;
+      if (physB) b.getComponent(Physics)!.ySpeed = 0;
     }
   }
 }
