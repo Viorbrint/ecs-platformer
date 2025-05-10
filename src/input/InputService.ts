@@ -71,7 +71,7 @@ export class InputService {
   }
 
   // Для систем, которым нужно сырое состояние клавиш
-  isKeyPressed(keyCode: string): boolean {
+  isKeyPressed(keyCode: KeyCode): boolean {
     return this.keyStates.get(keyCode)?.isPressed ?? false;
   }
 
