@@ -1,4 +1,7 @@
-type KeyBindings = Record<string, string>;
+import { GameAction } from "./GameAction";
+import { isKeyCode } from "./KeyCodeUtils";
+import { KeyBindings, KeyCode, KeyCodes } from "./KeysTypes";
+
 type KeyState = {
   isPressed: boolean;
   justPressed: boolean;
@@ -6,6 +9,11 @@ type KeyState = {
 };
 
 export class InputService {
+  private defaultBindings: KeyBindings = {
+    jump: KeyCodes.ARROW_UP,
+    moveLeft: KeyCodes.ARROW_LEFT,
+    moveRight: KeyCodes.ARROW_RIGHT,
+  };
   private keyStates: Map<string, KeyState>;
   private keyBindings: KeyBindings;
   private handlers: {
@@ -13,13 +21,8 @@ export class InputService {
     keyup: (e: KeyboardEvent) => void;
   };
 
-  constructor(bindings: KeyBindings = {}) {
-    this.keyBindings = {
-      jump: "ArrowUp",
-      moveLeft: "ArrowLeft",
-      moveRight: "ArrowRight",
-      ...bindings,
-    };
+  constructor(customBindings: KeyBindings = {}) {
+    this.keyBindings = { ...this.defaultBindings, ...customBindings };
 
     this.keyStates = new Map();
     this.handlers = {
@@ -37,19 +40,19 @@ export class InputService {
 
   private handleKey(event: KeyboardEvent, isPressed: boolean) {
     const key = event.code;
+
+    if (isPressed && !isKeyCode(key)) {
+      // console.log("Not a key code: " + key);
+      return;
+    }
+
     const currentState = this.keyStates.get(key) || this.createKeyState();
 
-    // Обновляем состояние с учетом предыдущего кадра
     this.keyStates.set(key, {
       isPressed,
       justPressed: isPressed && !currentState.isPressed,
       justReleased: !isPressed && currentState.isPressed,
     });
-
-    // Предотвращаем "распространение" стандартных действий браузера
-    if (isPressed && Object.values(this.keyBindings).includes(key)) {
-      event.preventDefault();
-    }
   }
 
   private createKeyState(): KeyState {
@@ -57,12 +60,12 @@ export class InputService {
   }
 
   // Основные методы API
-  isActionPressed(action: string): boolean {
+  isActionPressed(action: GameAction): boolean {
     const key = this.keyBindings[action];
     return key ? (this.keyStates.get(key)?.isPressed ?? false) : false;
   }
 
-  isActionJustPressed(action: string): boolean {
+  isActionJustPressed(action: GameAction): boolean {
     const key = this.keyBindings[action];
     return key ? (this.keyStates.get(key)?.justPressed ?? false) : false;
   }
@@ -80,7 +83,7 @@ export class InputService {
   }
 
   // Динамическое изменение привязок
-  rebindAction(action: string, newKey: string) {
+  rebindAction(action: GameAction, newKey: KeyCode) {
     this.keyBindings[action] = newKey;
   }
 
