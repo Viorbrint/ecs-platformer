@@ -29,14 +29,12 @@ export class RenderSystem extends System {
     this.clear();
 
     this.query(Transform, Renderable).forEach((entity) => {
-      const t = entity.getComponent(Transform);
-      const p = entity.getComponent(Position);
-      const renderable = entity.getComponent(Renderable);
+      const t = entity.getComponent(Transform)!;
+      const p = entity.getComponent(Position)!;
+      const renderable = entity.getComponent(Renderable)!;
 
-      if (t && renderable) {
-        this.ctx.fillStyle = renderable.color;
-        this.drawRect(p.x, p.y, t.width, t.height, "red");
-      }
+      this.ctx.fillStyle = renderable.color;
+      this.drawRect(p.x, p.y, t.width, t.height, "red");
     });
   }
 
