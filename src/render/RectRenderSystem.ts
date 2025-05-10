@@ -14,13 +14,12 @@ export class RectRenderSystem extends RenderSystem {
 
       const screenPos = this.renderService.worldToScreen(x, y);
 
-      const ctx = this.renderService.context;
-      ctx.fillStyle = color;
-      ctx.fillRect(
+      this.renderService.drawRect(
         screenPos.x,
-        this.renderService.invertY(screenPos.y) - height,
+        screenPos.y,
         width,
         height,
+        color,
       );
     });
   }

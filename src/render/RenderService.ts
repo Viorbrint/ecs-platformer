@@ -1,4 +1,5 @@
 import { Position } from "../position/Position";
+import { Color } from "../utils/Color";
 
 export class RenderService {
   private currentCamera?: Position;
@@ -20,6 +21,11 @@ export class RenderService {
     window.addEventListener("resize", () => this.resize());
   }
 
+  drawRect(x: number, y: number, width: number, height: number, color: Color) {
+    this.ctx.fillStyle = color;
+    this.ctx.fillRect(x, this.invertY(y) - height, width, height);
+  }
+
   setCamera(camera: Position) {
     this.currentCamera = camera;
   }
@@ -35,7 +41,7 @@ export class RenderService {
     };
   }
 
-  invertY(y: number) {
+  private invertY(y: number) {
     return this.height - y;
   }
 
